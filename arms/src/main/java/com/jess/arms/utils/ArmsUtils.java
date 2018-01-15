@@ -15,7 +15,10 @@
  */
 package com.jess.arms.utils;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 
@@ -33,11 +36,33 @@ import com.jess.arms.di.component.AppComponent;
  */
 public class ArmsUtils {
 
+    public static final String IS_NOT_ADD_ACTIVITY_LIST = "is_not_add_activity_list";
+
+    @SuppressLint("StaticFieldLeak")
+    private static Application sApplication;
 
     private ArmsUtils() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 
+    /**
+     * 初始化工具类
+     *
+     * @param app 应用
+     */
+    public static void init(@NonNull final Application app) {
+        ArmsUtils.sApplication = app;
+    }
+
+    /**
+     * 获取 Application
+     *
+     * @return Application
+     */
+    public static Application getApp() {
+        if (sApplication != null) return sApplication;
+        throw new NullPointerException("u should init first");
+    }
 
     /**
      * 配置 RecyclerView

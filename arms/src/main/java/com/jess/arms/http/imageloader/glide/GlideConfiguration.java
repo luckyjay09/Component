@@ -31,7 +31,7 @@ import com.bumptech.glide.module.AppGlideModule;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.OkHttpUrlLoader;
 import com.jess.arms.http.imageloader.BaseImageLoaderStrategy;
-import com.jess.arms.utils.DataHelper;
+import com.jess.arms.util.CacheDataHelper;
 import com.jess.arms.utils.ArmsUtils;
 
 import java.io.File;
@@ -58,7 +58,7 @@ public class GlideConfiguration extends AppGlideModule {
             @Override
             public DiskCache build() {
                 // Careful: the external cache directory doesn't enforce permissions
-                return DiskLruCacheWrapper.get(DataHelper.makeDirs(new File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE);
+                return DiskLruCacheWrapper.get(CacheDataHelper.makeDirs(new File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE);
             }
         });
 

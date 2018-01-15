@@ -23,7 +23,6 @@ import android.support.v4.app.SupportActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.PermissionUtil;
 import com.jess.arms.utils.RxLifecycleUtils;
@@ -53,7 +52,6 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 @ActivityScope
 public class UserPresenter extends BasePresenter<UserContract.Model, UserContract.View> {
     private RxErrorHandler mErrorHandler;
-    private AppManager mAppManager;
     private Application mApplication;
     private List<User> mUsers;
     private RecyclerView.Adapter mAdapter;
@@ -64,11 +62,10 @@ public class UserPresenter extends BasePresenter<UserContract.Model, UserContrac
 
     @Inject
     public UserPresenter(UserContract.Model model, UserContract.View rootView, RxErrorHandler handler
-            , AppManager appManager, Application application, List<User> list, RecyclerView.Adapter adapter) {
+            , Application application, List<User> list, RecyclerView.Adapter adapter) {
         super(model, rootView);
         this.mApplication = application;
         this.mErrorHandler = handler;
-        this.mAppManager = appManager;
         this.mUsers = list;
         this.mAdapter = adapter;
     }
@@ -152,7 +149,6 @@ public class UserPresenter extends BasePresenter<UserContract.Model, UserContrac
         this.mAdapter = null;
         this.mUsers = null;
         this.mErrorHandler = null;
-        this.mAppManager = null;
         this.mApplication = null;
     }
 }

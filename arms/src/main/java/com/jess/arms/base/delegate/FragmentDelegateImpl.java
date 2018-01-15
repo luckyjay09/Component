@@ -21,7 +21,7 @@ import android.view.View;
 
 import com.jess.arms.utils.ArmsUtils;
 
-import org.simple.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

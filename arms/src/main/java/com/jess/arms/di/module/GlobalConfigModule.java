@@ -29,7 +29,7 @@ import com.jess.arms.http.imageloader.glide.GlideImageLoaderStrategy;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.cache.LruCache;
-import com.jess.arms.utils.DataHelper;
+import com.jess.arms.util.CacheDataHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class GlobalConfigModule {
     @Singleton
     @Provides
     File provideCacheFile(Application application) {
-        return mCacheFile == null ? DataHelper.getCacheFile(application) : mCacheFile;
+        return mCacheFile == null ? CacheDataHelper.getCacheFile(application) : mCacheFile;
     }
 
 

@@ -22,7 +22,7 @@ import android.support.annotation.Nullable;
 import com.google.gson.Gson;
 import com.jess.arms.http.GlobalHttpHandler;
 import com.jess.arms.http.RequestInterceptor;
-import com.jess.arms.utils.DataHelper;
+import com.jess.arms.util.CacheDataHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -173,7 +173,7 @@ public class ClientModule {
     @Named("RxCacheDirectory")
     File provideRxCacheDirectory(File cacheDir) {
         File cacheDirectory = new File(cacheDir, "RxCache");
-        return DataHelper.makeDirs(cacheDirectory);
+        return CacheDataHelper.makeDirs(cacheDirectory);
     }
 
     /**

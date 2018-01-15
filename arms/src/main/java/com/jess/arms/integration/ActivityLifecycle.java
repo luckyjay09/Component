@@ -18,17 +18,16 @@ package com.jess.arms.integration;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.base.delegate.ActivityDelegate;
-import com.jess.arms.base.delegate.ActivityDelegateImpl;
 import com.jess.arms.base.delegate.FragmentDelegate;
 import com.jess.arms.base.delegate.IActivity;
 import com.jess.arms.integration.cache.Cache;
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.ActivityUtils;
+import com.jess.arms.utils.ArmsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,15 +50,13 @@ import javax.inject.Singleton;
 @Singleton
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
-    private AppManager mAppManager;
     private Application mApplication;
     private Cache<String, Object> mExtras;
     private FragmentManager.FragmentLifecycleCallbacks mFragmentLifecycle;
     private List<FragmentManager.FragmentLifecycleCallbacks> mFragmentLifecycles;
 
     @Inject
-    public ActivityLifecycle(AppManager appManager, Application application, Cache<String, Object> extras) {
-        this.mAppManager = appManager;
+    public ActivityLifecycle(Application application, Cache<String, Object> extras) {
         this.mApplication = application;
         this.mExtras = extras;
     }
@@ -69,80 +66,43 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         //如果 intent 包含了此字段,并且为 true 说明不加入到 list 进行统一管理
         boolean isNotAdd = false;
         if (activity.getIntent() != null)
-            isNotAdd = activity.getIntent().getBooleanExtra(AppManager.IS_NOT_ADD_ACTIVITY_LIST, false);
+            isNotAdd = activity.getIntent().getBooleanExtra(ArmsUtils.IS_NOT_ADD_ACTIVITY_LIST, false);
 
-        if (!isNotAdd)
-            mAppManager.addActivity(activity);
-
-        //配置ActivityDelegate
-        if (activity instanceof IActivity) {
-            ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-            if (activityDelegate == null) {
-                Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
-                activityDelegate = new ActivityDelegateImpl(activity);
-                cache.put(ActivityDelegate.ACTIVITY_DELEGATE, activityDelegate);
-            }
-            activityDelegate.onCreate(savedInstanceState);
-        }
+        if (!isNotAdd) ActivityUtils.add(activity);
+        ActivityUtils.setTopActivityWeakRef(activity);
 
         registerFragmentCallbacks(activity);
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onStart();
-        }
+        ActivityUtils.setTopActivityWeakRef(activity);
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-        mAppManager.setCurrentActivity(activity);
-
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onResume();
-        }
+        ActivityUtils.setTopActivityWeakRef(activity);
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onPause();
-        }
+
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        if (mAppManager.getCurrentActivity() == activity) {
-            mAppManager.setCurrentActivity(null);
-        }
 
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onStop();
-        }
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onSaveInstanceState(outState);
-        }
+
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        mAppManager.removeActivity(activity);
+        ActivityUtils.remove(activity);
 
-        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
-        if (activityDelegate != null) {
-            activityDelegate.onDestroy();
-            getCacheFromActivity((IActivity) activity).clear();
-        }
     }
 
     /**
@@ -175,22 +135,6 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
                 ((FragmentActivity) activity).getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycle, true);
             }
         }
-    }
-
-    private ActivityDelegate fetchActivityDelegate(Activity activity) {
-        ActivityDelegate activityDelegate = null;
-        if (activity instanceof IActivity) {
-            Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
-            activityDelegate = (ActivityDelegate) cache.get(ActivityDelegate.ACTIVITY_DELEGATE);
-        }
-        return activityDelegate;
-    }
-
-    @NonNull
-    private Cache<String, Object> getCacheFromActivity(IActivity activity) {
-        Cache<String, Object> cache = activity.provideCache();
-        Preconditions.checkNotNull(cache, "%s cannot be null on Activity", Cache.class.getName());
-        return cache;
     }
 
 }

@@ -241,7 +241,7 @@ public final class AppUtils {
      * 关闭 App
      */
     public static void exitApp() {
-        List<Activity> activityList = Utils.sActivityList;
+        List<Activity> activityList = ActivityUtils.getActivityList();
         for (int i = activityList.size() - 1; i >= 0; --i) {
             activityList.get(i).finish();
             activityList.remove(i);

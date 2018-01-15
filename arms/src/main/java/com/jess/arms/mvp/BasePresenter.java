@@ -27,9 +27,7 @@ import android.view.View;
 
 import com.jess.arms.utils.Preconditions;
 import com.trello.rxlifecycle2.RxLifecycle;
-
-import org.simple.eventbus.EventBus;
-
+import org.greenrobot.eventbus.EventBus;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -90,8 +88,8 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
                 ((LifecycleOwner) mRootView).getLifecycle().addObserver((LifecycleObserver) mModel);
             }
         }
-        if (useEventBus())//如果要使用 Eventbus 请将此方法返回 true
-            EventBus.getDefault().register(this);//注册 Eventbus
+        //如果要使用 Eventbus 请将此方法返回 true
+        if (useEventBus()) EventBus.getDefault().register(this);//注册 Eventbus
     }
 
     /**
@@ -99,8 +97,8 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
      */
     @Override
     public void onDestroy() {
-        if (useEventBus())//如果要使用 Eventbus 请将此方法返回 true
-            EventBus.getDefault().unregister(this);//解除注册 Eventbus
+        //如果要使用 Eventbus 请将此方法返回 true
+        if (useEventBus()) EventBus.getDefault().unregister(this);//解除注册 Eventbus
         unDispose();//解除订阅
         if (mModel != null)
             mModel.onDestroy();
@@ -128,12 +126,12 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
     }
 
     /**
-     * 是否使用 {@link EventBus},默认为使用(true)，
+     * 是否使用 {@link EventBus},默认为使用(false)，
      *
      * @return
      */
     public boolean useEventBus() {
-        return true;
+        return false;
     }
 
 

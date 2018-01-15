@@ -68,17 +68,7 @@ public class AppLifecyclesImpl implements AppLifecycles {
         //leakCanary内存泄露检查
         ArmsUtils.obtainAppComponentFromContext(application).extras().put(RefWatcher.class.getName(), BuildConfig.USE_CANARY ? LeakCanary.install(application) : RefWatcher.DISABLED);
         //扩展 AppManager 的远程遥控功能
-        ArmsUtils.obtainAppComponentFromContext(application).appManager().setHandleListener((appManager, message) -> {
-            switch (message.what) {
-                //case 0:
-                //do something ...
-                //   break;
-            }
-        });
-        //Usage:
-        //Message msg = new Message();
-        //msg.what = 0;
-        //AppManager.post(msg); like EventBus
+
     }
 
     @Override

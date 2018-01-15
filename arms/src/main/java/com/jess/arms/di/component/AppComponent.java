@@ -24,7 +24,6 @@ import com.jess.arms.di.module.AppModule;
 import com.jess.arms.di.module.ClientModule;
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.imageloader.ImageLoader;
-import com.jess.arms.integration.AppManager;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.utils.ArmsUtils;
@@ -52,9 +51,6 @@ import okhttp3.OkHttpClient;
 @Component(modules = {AppModule.class, ClientModule.class, GlobalConfigModule.class})
 public interface AppComponent {
     Application application();
-
-    //用于管理所有 activity
-    AppManager appManager();
 
     //用于管理网络请求层,以及数据缓存层
     IRepositoryManager repositoryManager();

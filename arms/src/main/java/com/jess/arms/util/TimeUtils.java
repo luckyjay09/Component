@@ -1,9 +1,7 @@
 package com.jess.arms.util;
 
 import android.annotation.SuppressLint;
-
-import com.blankj.utilcode.constant.TimeConstants;
-
+import com.jess.arms.constant.TimeConstants;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

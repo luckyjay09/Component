@@ -9,8 +9,6 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.blankj.utilcode.util.ShellUtils.CommandResult;
-
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -100,7 +98,7 @@ public final class NetworkUtils {
         if (ip == null || ip.length() <= 0) {
             ip = "223.5.5.5";// 阿里巴巴公共 ip
         }
-        CommandResult result = ShellUtils.execCmd(String.format("ping -c 1 %s", ip), false);
+        ShellUtils.CommandResult result = ShellUtils.execCmd(String.format("ping -c 1 %s", ip), false);
         boolean ret = result.result == 0;
         if (result.errorMsg != null) {
             Log.d("NetworkUtils", "isAvailableByPing() called" + result.errorMsg);

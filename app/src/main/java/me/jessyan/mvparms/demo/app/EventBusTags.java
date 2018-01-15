@@ -15,7 +15,7 @@
   */
 package me.jessyan.mvparms.demo.app;
 
-import org.simple.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * ================================================

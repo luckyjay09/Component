@@ -27,7 +27,8 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.LruCache;
 
-import org.simple.eventbus.EventBus;
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * ================================================

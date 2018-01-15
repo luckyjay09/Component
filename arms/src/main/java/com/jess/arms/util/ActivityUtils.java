@@ -1,5 +1,6 @@
 package com.jess.arms.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +16,8 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,9 +30,89 @@ import java.util.List;
  */
 public final class ActivityUtils {
 
+    @SuppressLint("StaticFieldLeak")
+    private static WeakReference<Activity> sTopActivityWeakRef;
+    private static List<Activity> sActivityList = new LinkedList<>();
+
     private ActivityUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
+
+    public static void setTopActivityWeakRef(final Activity activity) {
+        if (sTopActivityWeakRef == null || !activity.equals(sTopActivityWeakRef.get())) {
+            sTopActivityWeakRef = new WeakReference<>(activity);
+        }
+    }
+
+    public static void add(Activity activity) {
+        sActivityList.add(activity);
+    }
+
+    public static void remove(Activity activity) {
+        sActivityList.remove(activity);
+    }
+
+    /**
+     * 获取 Activity 栈链表
+     *
+     * @return Activity 栈链表
+     */
+    public static List<Activity> getActivityList() {
+        return sActivityList;
+    }
+
+    /**
+     * 获取栈顶 Activity
+     *
+     * @return 栈顶 Activity
+     */
+    public static Activity getTopActivity() {
+        if (sTopActivityWeakRef != null) {
+            Activity activity = sTopActivityWeakRef.get();
+            if (activity != null) {
+                return activity;
+            }
+        }
+        int size = sActivityList.size();
+        return size > 0 ? sActivityList.get(size - 1) : null;
+    }
+
+    /**
+     * 判断 Activity 是否存在栈中
+     *
+     * @param activity activity
+     * @return {@code true}: 存在<br>{@code false}: 不存在
+     */
+    public static boolean isActivityExistsInStack(@NonNull final Activity activity) {
+        for (Activity aActivity : sActivityList) {
+            if (aActivity.equals(activity)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断 Activity 是否存在栈中
+     *
+     * @param clz Activity 类
+     * @return {@code true}: 存在<br>{@code false}: 不存在
+     */
+    public static boolean isActivityExistsInStack(@NonNull final Class<?> clz) {
+        for (Activity aActivity : sActivityList) {
+            if (aActivity.getClass().equals(clz)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Context getActivityOrApp() {
+        Activity topActivity = getTopActivity();
+        return topActivity == null ? Utils.getApp() : topActivity;
+    }
+
+
 
     /**
      * 判断 Activity 是否存在
@@ -662,15 +745,6 @@ public final class ActivityUtils {
     }
 
     /**
-     * 获取 Activity 栈链表
-     *
-     * @return Activity 栈链表
-     */
-    public static List<Activity> getActivityList() {
-        return Utils.sActivityList;
-    }
-
-    /**
      * 获取启动项 Activity
      *
      * @return 启动项 Activity
@@ -697,55 +771,6 @@ public final class ActivityUtils {
             }
         }
         return "no " + packageName;
-    }
-
-    /**
-     * 获取栈顶 Activity
-     *
-     * @return 栈顶 Activity
-     */
-    public static Activity getTopActivity() {
-        if (Utils.sTopActivityWeakRef != null) {
-            Activity activity = Utils.sTopActivityWeakRef.get();
-            if (activity != null) {
-                return activity;
-            }
-        }
-        List<Activity> activities = Utils.sActivityList;
-        int size = activities.size();
-        return size > 0 ? activities.get(size - 1) : null;
-    }
-
-    /**
-     * 判断 Activity 是否存在栈中
-     *
-     * @param activity activity
-     * @return {@code true}: 存在<br>{@code false}: 不存在
-     */
-    public static boolean isActivityExistsInStack(@NonNull final Activity activity) {
-        List<Activity> activities = Utils.sActivityList;
-        for (Activity aActivity : activities) {
-            if (aActivity.equals(activity)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断 Activity 是否存在栈中
-     *
-     * @param clz Activity 类
-     * @return {@code true}: 存在<br>{@code false}: 不存在
-     */
-    public static boolean isActivityExistsInStack(@NonNull final Class<?> clz) {
-        List<Activity> activities = Utils.sActivityList;
-        for (Activity aActivity : activities) {
-            if (aActivity.getClass().equals(clz)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -800,8 +825,7 @@ public final class ActivityUtils {
      * @param isLoadAnim 是否启动动画
      */
     public static void finishActivity(@NonNull final Class<?> clz, final boolean isLoadAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (Activity activity : activities) {
+        for (Activity activity : sActivityList) {
             if (activity.getClass().equals(clz)) {
                 activity.finish();
                 if (!isLoadAnim) {
@@ -821,8 +845,7 @@ public final class ActivityUtils {
     public static void finishActivity(@NonNull final Class<?> clz,
                                       @AnimRes final int enterAnim,
                                       @AnimRes final int exitAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (Activity activity : activities) {
+        for (Activity activity : sActivityList) {
             if (activity.getClass().equals(clz)) {
                 activity.finish();
                 activity.overridePendingTransition(enterAnim, exitAnim);
@@ -851,9 +874,8 @@ public final class ActivityUtils {
     public static boolean finishToActivity(@NonNull final Activity activity,
                                            final boolean isIncludeSelf,
                                            final boolean isLoadAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (int i = activities.size() - 1; i >= 0; --i) {
-            Activity aActivity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {
+            Activity aActivity = sActivityList.get(i);
             if (aActivity.equals(activity)) {
                 if (isIncludeSelf) {
                     finishActivity(aActivity, isLoadAnim);
@@ -877,9 +899,8 @@ public final class ActivityUtils {
                                            final boolean isIncludeSelf,
                                            @AnimRes final int enterAnim,
                                            @AnimRes final int exitAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (int i = activities.size() - 1; i >= 0; --i) {
-            Activity aActivity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {
+            Activity aActivity = sActivityList.get(i);
             if (aActivity.equals(activity)) {
                 if (isIncludeSelf) {
                     finishActivity(aActivity, enterAnim, exitAnim);
@@ -912,9 +933,8 @@ public final class ActivityUtils {
     public static boolean finishToActivity(@NonNull final Class<?> clz,
                                            final boolean isIncludeSelf,
                                            final boolean isLoadAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (int i = activities.size() - 1; i >= 0; --i) {
-            Activity aActivity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {
+            Activity aActivity = sActivityList.get(i);
             if (aActivity.getClass().equals(clz)) {
                 if (isIncludeSelf) {
                     finishActivity(aActivity, isLoadAnim);
@@ -938,9 +958,8 @@ public final class ActivityUtils {
                                            final boolean isIncludeSelf,
                                            @AnimRes final int enterAnim,
                                            @AnimRes final int exitAnim) {
-        List<Activity> activities = Utils.sActivityList;
-        for (int i = activities.size() - 1; i >= 0; --i) {
-            Activity aActivity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {
+            Activity aActivity = sActivityList.get(i);
             if (aActivity.getClass().equals(clz)) {
                 if (isIncludeSelf) {
                     finishActivity(aActivity, enterAnim, exitAnim);
@@ -970,10 +989,9 @@ public final class ActivityUtils {
      */
     public static void finishOtherActivities(@NonNull final Class<?> clz,
                                              final boolean isLoadAnim) {
-        List<Activity> activities = Utils.sActivityList;
         boolean flag = false;
-        for (int i = activities.size() - 1; i >= 0; i--) {
-            Activity activity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; i--) {
+            Activity activity = sActivityList.get(i);
             if (activity.getClass().equals(clz)) {
                 if (flag) {
                     finishActivity(activity, isLoadAnim);
@@ -996,10 +1014,9 @@ public final class ActivityUtils {
     public static void finishOtherActivities(@NonNull final Class<?> clz,
                                              @AnimRes final int enterAnim,
                                              @AnimRes final int exitAnim) {
-        List<Activity> activities = Utils.sActivityList;
         boolean flag = false;
-        for (int i = activities.size() - 1; i >= 0; i--) {
-            Activity activity = activities.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; i--) {
+            Activity activity = sActivityList.get(i);
             if (activity.getClass().equals(clz)) {
                 if (flag) {
                     finishActivity(activity, enterAnim, exitAnim);
@@ -1025,9 +1042,8 @@ public final class ActivityUtils {
      * @param isLoadAnim 是否启动动画
      */
     public static void finishAllActivities(final boolean isLoadAnim) {
-        List<Activity> activityList = Utils.sActivityList;
-        for (int i = activityList.size() - 1; i >= 0; --i) {// 从栈顶开始移除
-            Activity activity = activityList.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {// 从栈顶开始移除
+            Activity activity = sActivityList.get(i);
             activity.finish();// 在 onActivityDestroyed 发生 remove
             if (!isLoadAnim) {
                 activity.overridePendingTransition(0, 0);
@@ -1043,9 +1059,8 @@ public final class ActivityUtils {
      */
     public static void finishAllActivities(@AnimRes final int enterAnim,
                                            @AnimRes final int exitAnim) {
-        List<Activity> activityList = Utils.sActivityList;
-        for (int i = activityList.size() - 1; i >= 0; --i) {// 从栈顶开始移除
-            Activity activity = activityList.get(i);
+        for (int i = sActivityList.size() - 1; i >= 0; --i) {// 从栈顶开始移除
+            Activity activity = sActivityList.get(i);
             activity.finish();// 在 onActivityDestroyed 发生 remove
             activity.overridePendingTransition(enterAnim, exitAnim);
         }
@@ -1064,10 +1079,9 @@ public final class ActivityUtils {
      * @param isLoadAnim 是否启动动画
      */
     public static void finishAllActivitiesExceptNewest(final boolean isLoadAnim) {
-        List<Activity> activities = Utils.sActivityList;
         boolean flag = false;
-        for (int i = activities.size() - 2; i >= 0; i--) {
-            finishActivity(activities.get(i), isLoadAnim);
+        for (int i = sActivityList.size() - 2; i >= 0; i--) {
+            finishActivity(sActivityList.get(i), isLoadAnim);
         }
     }
 
@@ -1079,10 +1093,9 @@ public final class ActivityUtils {
      */
     public static void finishAllActivitiesExceptNewest(@AnimRes final int enterAnim,
                                                        @AnimRes final int exitAnim) {
-        List<Activity> activities = Utils.sActivityList;
         boolean flag = false;
-        for (int i = activities.size() - 2; i >= 0; i--) {
-            finishActivity(activities.get(i), enterAnim, exitAnim);
+        for (int i = sActivityList.size() - 2; i >= 0; i--) {
+            finishActivity(sActivityList.get(i), enterAnim, exitAnim);
         }
     }
 
@@ -1136,12 +1149,6 @@ public final class ActivityUtils {
             e.printStackTrace();
             return null;
         }
-    }
-
-
-    private static Context getActivityOrApp() {
-        Activity topActivity = getTopActivity();
-        return topActivity == null ? Utils.getApp() : topActivity;
     }
 
     private static void startActivity(final Context context,

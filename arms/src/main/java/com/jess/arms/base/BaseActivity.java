@@ -29,6 +29,8 @@ import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -73,6 +75,11 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (useEventBus()) {
+            EventBus.getDefault().register(this);
+        }
+        setupActivityComponent(ArmsUtils.obtainAppComponentFromContext(this));//依赖注入
+
         try {
             int layoutResID = initView(savedInstanceState);
             if (layoutResID != 0) {//如果initView返回0,框架则不会调用setContentView(),当然也不会 Bind ButterKnife
@@ -89,22 +96,23 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY)
-            mUnbinder.unbind();
+        if (useEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) mUnbinder.unbind();
         this.mUnbinder = null;
-        if (mPresenter != null)
-            mPresenter.onDestroy();//释放资源
+        if (mPresenter != null) mPresenter.onDestroy();//释放资源
         this.mPresenter = null;
     }
 
     /**
-     * 是否使用eventBus,默认为使用(true)，
+     * 是否使用eventBus,默认为使用(false)，
      *
      * @return
      */
     @Override
     public boolean useEventBus() {
-        return true;
+        return false;
     }
 
     /**
