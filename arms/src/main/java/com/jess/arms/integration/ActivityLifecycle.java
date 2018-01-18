@@ -18,16 +18,19 @@ package com.jess.arms.integration;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.base.delegate.ActivityDelegate;
+import com.jess.arms.base.delegate.ActivityDelegateImpl;
 import com.jess.arms.base.delegate.FragmentDelegate;
 import com.jess.arms.base.delegate.IActivity;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.util.ActivityUtils;
 import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +66,25 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        ActivityUtils.setTopActivityWeakRef(activity);
         //如果 intent 包含了此字段,并且为 true 说明不加入到 list 进行统一管理
         boolean isNotAdd = false;
-        if (activity.getIntent() != null)
+        if (activity.getIntent() != null) {
             isNotAdd = activity.getIntent().getBooleanExtra(ArmsUtils.IS_NOT_ADD_ACTIVITY_LIST, false);
+        }
 
         if (!isNotAdd) ActivityUtils.add(activity);
-        ActivityUtils.setTopActivityWeakRef(activity);
+
+        //配置ActivityDelegate
+        if (activity instanceof IActivity) {
+            ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+            if (activityDelegate == null) {
+                Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
+                activityDelegate = new ActivityDelegateImpl(activity);
+                cache.put(ActivityDelegate.ACTIVITY_DELEGATE, activityDelegate);
+            }
+            activityDelegate.onCreate(savedInstanceState);
+        }
 
         registerFragmentCallbacks(activity);
     }
@@ -77,32 +92,56 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     @Override
     public void onActivityStarted(Activity activity) {
         ActivityUtils.setTopActivityWeakRef(activity);
+
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onStart();
+        }
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
         ActivityUtils.setTopActivityWeakRef(activity);
+
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onResume();
+        }
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onPause();
+        }
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onStop();
+        }
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onSaveInstanceState(outState);
+        }
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
         ActivityUtils.remove(activity);
 
+        ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        if (activityDelegate != null) {
+            activityDelegate.onDestroy();
+            getCacheFromActivity((IActivity) activity).clear();
+        }
     }
 
     /**
@@ -137,4 +176,19 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         }
     }
 
+    private ActivityDelegate fetchActivityDelegate(Activity activity) {
+        ActivityDelegate activityDelegate = null;
+        if (activity instanceof IActivity) {
+            Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
+            activityDelegate = (ActivityDelegate) cache.get(ActivityDelegate.ACTIVITY_DELEGATE);
+        }
+        return activityDelegate;
+    }
+
+    @NonNull
+    private Cache<String, Object> getCacheFromActivity(IActivity activity) {
+        Cache<String, Object> cache = activity.provideCache();
+        Preconditions.checkNotNull(cache, "%s cannot be null on Activity", Cache.class.getName());
+        return cache;
+    }
 }
