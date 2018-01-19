@@ -15,9 +15,7 @@
   */
 package com.jess.arms.integration;
 
-import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.module.GlobalConfigModule;
@@ -51,20 +49,4 @@ public interface ConfigModule {
      */
     void injectAppLifecycle(Context context, List<AppLifecycles> lifecycles);
 
-    /**
-     * 使用{@link Application.ActivityLifecycleCallbacks}在Activity的生命周期中注入一些操作
-     *
-     * @param context
-     * @param lifecycles
-     */
-    void injectActivityLifecycle(Context context, List<Application.ActivityLifecycleCallbacks> lifecycles);
-
-
-    /**
-     * 使用{@link FragmentManager.FragmentLifecycleCallbacks}在Fragment的生命周期中注入一些操作
-     *
-     * @param context
-     * @param lifecycles
-     */
-    void injectFragmentLifecycle(Context context, List<FragmentManager.FragmentLifecycleCallbacks> lifecycles);
 }

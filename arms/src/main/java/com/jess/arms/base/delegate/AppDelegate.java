@@ -62,7 +62,6 @@ public class AppDelegate implements App, AppLifecycles {
     protected ActivityLifecycleForRxLifecycle mActivityLifecycleForRxLifecycle;
     private List<ConfigModule> mModules;
     private List<AppLifecycles> mAppLifecycles = new ArrayList<>();
-    private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
     private ComponentCallbacks2 mComponentCallback;
 
     public AppDelegate(Context context) {
@@ -72,12 +71,8 @@ public class AppDelegate implements App, AppLifecycles {
 
         //遍历之前获得的集合, 执行每一个 ConfigModule 实现类的某些方法
         for (ConfigModule module : mModules) {
-
             //将个人实现的 Application 的生命周期回调 (AppLifecycles) 存入 mAppLifecycles 集合 (此时还未注册回调)
             module.injectAppLifecycle(context, mAppLifecycles);
-
-            //将个人实现的 Activity 的生命周期回调 (ActivityLifecycleCallbacks) 存入 mActivityLifecycles 集合 (此时还未注册回调)
-            module.injectActivityLifecycle(context, mActivityLifecycles);
         }
     }
 
@@ -113,12 +108,6 @@ public class AppDelegate implements App, AppLifecycles {
         //该注册是为了 RxLifecycle 能在每个 Activity 或 Fragment 的生命周期中, 发送对应 Event 事件
         mApplication.registerActivityLifecycleCallbacks(mActivityLifecycleForRxLifecycle);
 
-        //遍历 mActivityLifecycles, 注册所有 Activity 的生命周期回调, 每个 ConfigModule 的实现类可以声明多个 Activity 的生命周期回调
-        //也可以有 N 个 ConfigModule 的实现类 (完美支持组件化项目 各个 Module 的各种独特需求)
-        for (Application.ActivityLifecycleCallbacks lifecycle : mActivityLifecycles) {
-            mApplication.registerActivityLifecycleCallbacks(lifecycle);
-        }
-
         mComponentCallback = new AppComponentCallbacks(mApplication, mAppComponent);
 
         mApplication.registerComponentCallbacks(mComponentCallback);
@@ -141,11 +130,7 @@ public class AppDelegate implements App, AppLifecycles {
         if (mComponentCallback != null) {
             mApplication.unregisterComponentCallbacks(mComponentCallback);
         }
-        if (mActivityLifecycles != null && mActivityLifecycles.size() > 0) {
-            for (Application.ActivityLifecycleCallbacks lifecycle : mActivityLifecycles) {
-                mApplication.unregisterActivityLifecycleCallbacks(lifecycle);
-            }
-        }
+
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
             for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onTerminate(mApplication);
@@ -154,7 +139,6 @@ public class AppDelegate implements App, AppLifecycles {
         this.mAppComponent = null;
         this.mActivityLifecycle = null;
         this.mActivityLifecycleForRxLifecycle = null;
-        this.mActivityLifecycles = null;
         this.mComponentCallback = null;
         this.mAppLifecycles = null;
         this.mApplication = null;

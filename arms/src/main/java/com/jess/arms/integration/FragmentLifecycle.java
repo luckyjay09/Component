@@ -17,157 +17,73 @@ package com.jess.arms.integration;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.jess.arms.base.delegate.FragmentDelegate;
-import com.jess.arms.base.delegate.FragmentDelegateImpl;
-import com.jess.arms.base.delegate.IFragment;
-import com.jess.arms.integration.cache.Cache;
-import com.jess.arms.utils.Preconditions;
-
 import timber.log.Timber;
 
-/**
- * ================================================
- * {@link FragmentManager.FragmentLifecycleCallbacks} 默认实现类
- * 通过 {@link FragmentDelegate} 管理 {@link Fragment}
- * <p>
- * Created by JessYan on 04/09/2017 16:04
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
- */
+
 public class FragmentLifecycle extends FragmentManager.FragmentLifecycleCallbacks {
 
     @Override
     public void onFragmentAttached(FragmentManager fm, Fragment f, Context context) {
-        Timber.w(f.toString() + " - onFragmentAttached");
-        if (f instanceof IFragment) {
-            FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-            if (fragmentDelegate == null || !fragmentDelegate.isAdded()) {
-                Cache<String, Object> cache = getCacheFromFragment((IFragment) f);
-                fragmentDelegate = new FragmentDelegateImpl(fm, f);
-                cache.put(FragmentDelegate.FRAGMENT_DELEGATE, fragmentDelegate);
-            }
-            fragmentDelegate.onAttach(context);
-        }
+        Timber.i(f.toString() + " - onFragmentAttached");
     }
 
     @Override
     public void onFragmentCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        Timber.w(f.toString() + " - onFragmentCreated");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onCreate(savedInstanceState);
-        }
+        Timber.i(f.toString() + " - onFragmentCreated");
     }
 
     @Override
     public void onFragmentViewCreated(FragmentManager fm, Fragment f, View v, Bundle savedInstanceState) {
-        Timber.w(f.toString() + " - onFragmentViewCreated");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onCreateView(v, savedInstanceState);
-        }
+        Timber.i(f.toString() + " - onFragmentViewCreated");
     }
 
     @Override
     public void onFragmentActivityCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
-        Timber.w(f.toString() + " - onFragmentActivityCreated");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onActivityCreate(savedInstanceState);
-        }
+        Timber.i(f.toString() + " - onFragmentActivityCreated");
     }
 
     @Override
     public void onFragmentStarted(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentStarted");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onStart();
-        }
+        Timber.i(f.toString() + " - onFragmentStarted");
     }
 
     @Override
     public void onFragmentResumed(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentResumed");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onResume();
-        }
+        Timber.i(f.toString() + " - onFragmentResumed");
     }
 
     @Override
     public void onFragmentPaused(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentPaused");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onPause();
-        }
+        Timber.i(f.toString() + " - onFragmentPaused");
     }
 
     @Override
     public void onFragmentStopped(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentStopped");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onStop();
-        }
+        Timber.i(f.toString() + " - onFragmentStopped");
     }
 
     @Override
     public void onFragmentSaveInstanceState(FragmentManager fm, Fragment f, Bundle outState) {
-        Timber.w(f.toString() + " - onFragmentSaveInstanceState");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onSaveInstanceState(outState);
-        }
+        Timber.i(f.toString() + " - onFragmentSaveInstanceState");
     }
 
     @Override
     public void onFragmentViewDestroyed(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentViewDestroyed");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onDestroyView();
-        }
+        Timber.i(f.toString() + " - onFragmentViewDestroyed");
     }
 
     @Override
     public void onFragmentDestroyed(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentDestroyed");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onDestroy();
-        }
+        Timber.i(f.toString() + " - onFragmentDestroyed");
     }
 
     @Override
     public void onFragmentDetached(FragmentManager fm, Fragment f) {
-        Timber.w(f.toString() + " - onFragmentDetached");
-        FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
-        if (fragmentDelegate != null) {
-            fragmentDelegate.onDetach();
-        }
-    }
-
-    private FragmentDelegate fetchFragmentDelegate(Fragment fragment) {
-        if (fragment instanceof IFragment) {
-            Cache<String, Object> cache = getCacheFromFragment((IFragment) fragment);
-            return (FragmentDelegate) cache.get(FragmentDelegate.FRAGMENT_DELEGATE);
-        }
-        return null;
-    }
-
-    @NonNull
-    private Cache<String, Object> getCacheFromFragment(IFragment fragment) {
-        Cache<String, Object> cache = fragment.provideCache();
-        Preconditions.checkNotNull(cache, "%s cannot be null on Fragment", Cache.class.getName());
-        return cache;
+        Timber.i(f.toString() + " - onFragmentDetached");
     }
 
 }
