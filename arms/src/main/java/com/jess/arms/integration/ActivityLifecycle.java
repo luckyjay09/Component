@@ -22,7 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import com.jess.arms.base.BaseFragment;
+import com.jess.arms.base.MVPBaseFragment;
 import com.jess.arms.base.delegate.ActivityDelegate;
 import com.jess.arms.base.delegate.ActivityDelegateImpl;
 import com.jess.arms.base.delegate.FragmentDelegate;
@@ -147,7 +147,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     /**
      * 给每个 Activity 的所有 Fragment 设置监听其生命周期, Activity 可以通过 {@link IActivity#useFragment()}
      * 设置是否使用监听,如果这个 Activity 返回 false 的话,这个 Activity 下面的所有 Fragment 将不能使用 {@link FragmentDelegate}
-     * 意味着 {@link BaseFragment} 也不能使用
+     * 意味着 {@link MVPBaseFragment} 也不能使用
      *
      * @param activity
      */

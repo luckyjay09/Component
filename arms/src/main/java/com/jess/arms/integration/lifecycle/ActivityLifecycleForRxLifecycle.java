@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
+import com.jess.arms.base.MVPBaseActivity;
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -104,7 +105,7 @@ public class ActivityLifecycleForRxLifecycle implements Application.ActivityLife
     }
 
     /**
-     * 从 {@link com.jess.arms.base.BaseActivity} 中获得桥梁对象 {@code BehaviorSubject<ActivityEvent> mLifecycleSubject}
+     * 从 {@link MVPBaseActivity} 中获得桥梁对象 {@code BehaviorSubject<ActivityEvent> mLifecycleSubject}
      * @see <a href="https://mcxiaoke.gitbooks.io/rxdocs/content/Subject.html">BehaviorSubject 官方中文文档</a>
      */
     private Subject<ActivityEvent> obtainSubject(Activity activity) {
