@@ -6,10 +6,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.jess.arms.base.MVPBaseActivity;
+import com.jess.arms.base.MvpBaseActivity;
 import com.jess.arms.di.component.AppComponent;
 
-public class MainActivity extends MVPBaseActivity {
+public class MainActivity extends MvpBaseActivity {
 
     private TextView mTextMessage;
 

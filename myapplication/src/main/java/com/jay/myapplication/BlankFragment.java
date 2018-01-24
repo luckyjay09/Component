@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jess.arms.base.MVPBaseFragment;
+import com.jess.arms.base.MvpBaseFragment;
 import com.jess.arms.di.component.AppComponent;
 
 import timber.log.Timber;
@@ -22,7 +22,7 @@ import timber.log.Timber;
  * Use the {@link BlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment extends MVPBaseFragment {
+public class BlankFragment extends MvpBaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

@@ -18,7 +18,7 @@ package com.jess.arms.base;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.jess.arms.utils.ThirdViewUtil;
+import com.jess.arms.util.ThirdViewUtil;
 
 /**
  * ================================================

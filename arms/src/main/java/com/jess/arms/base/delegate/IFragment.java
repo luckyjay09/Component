@@ -22,7 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jess.arms.base.MVPBaseFragment;
+import com.jess.arms.base.MvpBaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.LruCache;
@@ -34,7 +34,7 @@ import org.greenrobot.eventbus.EventBus;
  * ================================================
  * 框架要求框架中的每个 {@link Fragment} 都需要实现此类,以满足规范
  *
- * @see MVPBaseFragment
+ * @see MvpBaseFragment
  * Created by JessYan on 29/04/2017 14:31
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>

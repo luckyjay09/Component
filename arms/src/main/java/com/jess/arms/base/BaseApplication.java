@@ -22,17 +22,10 @@ import android.support.annotation.NonNull;
 import com.jess.arms.base.delegate.AppDelegate;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.Preconditions;
 
 /**
- * ================================================
- * 本框架由 MVP + Dagger2 + Retrofit + RxJava + Androideventbus + Butterknife 组成
- *
- * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki">请配合官方 Wiki 文档学习本框架</a>
- * Created by JessYan on 22/03/2016
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
- * ================================================
+ * 本框架由 MVP + Dagger2 + Retrofit + RxJava2 + Eeventbus + Butterknife 组成
  */
 public class BaseApplication extends Application implements App {
     private AppLifecycles mAppDelegate;

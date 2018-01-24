@@ -26,7 +26,7 @@ import com.jess.arms.base.delegate.FragmentDelegate;
 import com.jess.arms.base.delegate.FragmentDelegateImpl;
 import com.jess.arms.base.delegate.IFragment;
 import com.jess.arms.integration.cache.Cache;
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.Preconditions;
 
 import timber.log.Timber;
 

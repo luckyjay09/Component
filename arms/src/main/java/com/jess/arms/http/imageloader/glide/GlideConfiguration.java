@@ -32,7 +32,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.OkHttpUrlLoader;
 import com.jess.arms.http.imageloader.BaseImageLoaderStrategy;
 import com.jess.arms.util.CacheDataHelper;
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 
 import java.io.File;
 import java.io.InputStream;

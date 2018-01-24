@@ -21,8 +21,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
-import com.jess.arms.base.MVPBaseActivity;
-import com.jess.arms.base.MVPBaseFragment;
+import com.jess.arms.base.MvpBaseActivity;
+import com.jess.arms.base.MvpBaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.LruCache;
@@ -33,7 +33,7 @@ import org.greenrobot.eventbus.EventBus;
  * ================================================
  * 框架要求框架中的每个 {@link Activity} 都需要实现此类,以满足规范
  *
- * @see MVPBaseActivity
+ * @see MvpBaseActivity
  * Created by JessYan on 26/04/2017 21:42
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
@@ -82,7 +82,7 @@ public interface IActivity {
 
     /**
      * 这个Activity是否会使用Fragment,框架会根据这个属性判断是否注册{@link FragmentManager.FragmentLifecycleCallbacks}
-     * 如果返回false,那意味着这个Activity不需要绑定Fragment,那你再在这个Activity中绑定继承于 {@link MVPBaseFragment} 的Fragment将不起任何作用
+     * 如果返回false,那意味着这个Activity不需要绑定Fragment,那你再在这个Activity中绑定继承于 {@link MvpBaseFragment} 的Fragment将不起任何作用
      *
      * @return
      */

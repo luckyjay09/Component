@@ -26,7 +26,7 @@ import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.integration.cache.Cache;
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 
 import java.io.File;
 

@@ -24,8 +24,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.utils.PermissionUtil;
-import com.jess.arms.utils.RxLifecycleUtils;
+import com.jess.arms.util.RxPermissionUtil;
+import com.jess.arms.util.RxLifecycleUtils;
 
 import java.util.List;
 
@@ -81,7 +81,7 @@ public class UserPresenter extends BasePresenter<UserContract.Model, UserContrac
 
     public void requestUsers(final boolean pullToRefresh) {
         //请求外部存储权限用于适配android6.0的权限管理机制
-        PermissionUtil.externalStorage(new PermissionUtil.RequestPermission() {
+        RxPermissionUtil.externalStorage(new RxPermissionUtil.RequestPermission() {
             @Override
             public void onRequestPermissionSuccess() {
                 //request permission success, do something.

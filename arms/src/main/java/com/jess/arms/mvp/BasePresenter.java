@@ -25,7 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.SupportActivity;
 import android.view.View;
 
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.Preconditions;
 import com.trello.rxlifecycle2.RxLifecycle;
 import org.greenrobot.eventbus.EventBus;
 import io.reactivex.disposables.CompositeDisposable;

@@ -18,7 +18,7 @@ package com.jess.arms.base.delegate;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 
 import org.greenrobot.eventbus.EventBus;
 

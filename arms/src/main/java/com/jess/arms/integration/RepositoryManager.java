@@ -21,7 +21,7 @@ import android.content.Context;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.mvp.IModel;
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

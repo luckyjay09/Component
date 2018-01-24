@@ -26,7 +26,7 @@ import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.integration.cache.CacheType;
 import com.jess.arms.integration.lifecycle.ActivityLifecycleable;
 import com.jess.arms.mvp.IPresenter;
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import javax.inject.Inject;
@@ -39,14 +39,14 @@ import io.reactivex.subjects.Subject;
 /**
  * ================================================
  * 因为 Java 只能单继承,所以如果要用到需要继承特定 {@link Activity} 的三方库,那你就需要自己自定义 {@link Activity}
- * 继承于这个特定的 {@link Activity},然后再按照 {@link MVPBaseActivity} 的格式,将代码复制过去,记住一定要实现{@link IActivity}
+ * 继承于这个特定的 {@link Activity},然后再按照 {@link MvpBaseActivity} 的格式,将代码复制过去,记住一定要实现{@link IActivity}
  *
  * Created by JessYan on 22/03/2016
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public abstract class MVPBaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity, ActivityLifecycleable {
+public abstract class MvpBaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity, ActivityLifecycleable {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
@@ -107,7 +107,7 @@ public abstract class MVPBaseActivity<P extends IPresenter> extends AppCompatAct
 
     /**
      * 这个Activity是否会使用Fragment,框架会根据这个属性判断是否注册{@link android.support.v4.app.FragmentManager.FragmentLifecycleCallbacks}
-     * 如果返回false,那意味着这个Activity不需要绑定Fragment,那你再在这个Activity中绑定继承于 {@link MVPBaseFragment} 的Fragment将不起任何作用
+     * 如果返回false,那意味着这个Activity不需要绑定Fragment,那你再在这个Activity中绑定继承于 {@link MvpBaseFragment} 的Fragment将不起任何作用
      *
      * @return
      */

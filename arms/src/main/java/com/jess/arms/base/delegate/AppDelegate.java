@@ -32,7 +32,7 @@ import com.jess.arms.integration.ActivityLifecycle;
 import com.jess.arms.integration.ConfigModule;
 import com.jess.arms.integration.ManifestParser;
 import com.jess.arms.integration.lifecycle.ActivityLifecycleForRxLifecycle;
-import com.jess.arms.utils.Preconditions;
+import com.jess.arms.util.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;

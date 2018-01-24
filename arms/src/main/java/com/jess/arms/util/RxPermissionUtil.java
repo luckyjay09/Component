@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.jess.arms.utils;
+package com.jess.arms.util;
 
 import android.Manifest;
 
@@ -33,17 +33,17 @@ import timber.log.Timber;
  * ================================================
  * 权限请求工具类
  *
- * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.9">PermissionUtil wiki 官方文档</a>
+ * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.9">RxPermissionUtil wiki 官方文档</a>
  * Created by JessYan on 17/10/2016 10:09
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public class PermissionUtil {
+public class RxPermissionUtil {
     public static final String TAG = "Permission";
 
 
-    private PermissionUtil() {
+    private RxPermissionUtil() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 

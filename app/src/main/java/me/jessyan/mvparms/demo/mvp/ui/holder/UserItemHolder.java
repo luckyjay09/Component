@@ -23,7 +23,7 @@ import com.jess.arms.base.BaseHolder;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.http.imageloader.glide.ImageConfigImpl;
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 
 import butterknife.BindView;
 import io.reactivex.Observable;

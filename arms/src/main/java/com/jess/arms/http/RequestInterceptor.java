@@ -19,7 +19,7 @@ import android.support.annotation.Nullable;
 
 import com.jess.arms.di.module.GlobalConfigModule;
 import com.jess.arms.util.ZipUtils;
-import com.jess.arms.utils.CharacterHandler;
+import com.jess.arms.util.CharacterHandler;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

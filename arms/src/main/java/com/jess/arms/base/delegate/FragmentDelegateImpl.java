@@ -19,7 +19,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.jess.arms.utils.ArmsUtils;
+import com.jess.arms.util.ArmsUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
