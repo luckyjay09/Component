@@ -43,7 +43,7 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
 
-public abstract class BaseFragment<P extends IPresenter> extends Fragment implements FragmentLifecycleable {
+public abstract class MvpBaseFragment<P extends IPresenter> extends Fragment implements FragmentLifecycleable {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;

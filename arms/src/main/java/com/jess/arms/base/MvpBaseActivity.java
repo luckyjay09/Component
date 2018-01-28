@@ -39,7 +39,7 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
 
-public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements ActivityLifecycleable {
+public abstract class MvpBaseActivity<P extends IPresenter> extends AppCompatActivity implements ActivityLifecycleable {
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;

@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.MvpBaseActivity;
 import com.jess.arms.integration.cache.Cache;
 import com.jess.arms.util.ActivityUtils;
 import com.jess.arms.utils.ArmsUtils;
@@ -101,7 +101,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
      * @param activity
      */
     private void registerFragmentCallbacks(Activity activity) {
-        if (activity instanceof BaseActivity) {
+        if (activity instanceof MvpBaseActivity) {
 
             if (mFragmentLifecycle == null) {
                 mFragmentLifecycle = new FragmentLifecycle();
