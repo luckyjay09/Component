@@ -51,57 +51,57 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onAttach(Context context) {
-        Timber.d(mFragment.getClass().getSimpleName() + "onAttach: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onAttach: ");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Timber.d(mFragment.getClass().getSimpleName() + "onCreate: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onCreate: ");
         if (iFragment.useEventBus()) EventBus.getDefault().register(mFragment);
         iFragment.setupFragmentComponent(ArmsUtils.obtainAppComponentFromContext(mFragment.getActivity()));
     }
 
     @Override
     public void onCreateView(View view, Bundle savedInstanceState) {
-        Timber.d(mFragment.getClass().getSimpleName() + "onCreateView: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onCreateView: ");
         //绑定到butterknife
         if (view != null) mUnbinder = ButterKnife.bind(mFragment, view);
     }
 
     @Override
     public void onActivityCreate(Bundle savedInstanceState) {
-        Timber.d(mFragment.getClass().getSimpleName() + "onActivityCreate: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onActivityCreate: ");
         iFragment.initData(savedInstanceState);
     }
 
     @Override
     public void onStart() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onStart: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onStart: ");
     }
 
     @Override
     public void onResume() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onResume: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onResume: ");
     }
 
     @Override
     public void onPause() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onPause: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onPause: ");
     }
 
     @Override
     public void onStop() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onStop: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onStop: ");
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        Timber.d(mFragment.getClass().getSimpleName() + "onSaveInstanceState: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onSaveInstanceState: ");
     }
 
     @Override
     public void onDestroyView() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onDestroyView: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onDestroyView: ");
         if (mUnbinder != null && mUnbinder != mUnbinder.EMPTY) {
             try {
                 mUnbinder.unbind();
@@ -115,7 +115,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDestroy() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onDestroy: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onDestroy: ");
         if (iFragment != null && iFragment.useEventBus()) EventBus.getDefault().unregister(mFragment);
         this.mUnbinder = null;
         this.mFragmentManager = null;
@@ -125,7 +125,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDetach() {
-        Timber.d(mFragment.getClass().getSimpleName() + "onDetach: ");
+        Timber.i(mFragment.getClass().getSimpleName() + "onDetach: ");
     }
 
     /**

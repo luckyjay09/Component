@@ -16,6 +16,7 @@
 package com.jess.arms.base.delegate;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -59,16 +60,10 @@ public interface IFragment {
      */
     void setupFragmentComponent(AppComponent appComponent);
 
-    /**
-     * 是否使用 {@link EventBus}
-     *
-     * @return
-     */
-    boolean useEventBus();
+
 
     /**
-     * 初始化 View
-     *
+     *  重写此方法 初始化 View
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -77,10 +72,30 @@ public interface IFragment {
     View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     /**
+     * 获取资源布局
+     * @return
+     */
+    @LayoutRes int getLayoutRes();
+
+    /**
+     * 是否复用View
+     * @return
+     */
+    boolean isReuseView();
+
+
+    /**
      * 初始化数据
      *
      * @param savedInstanceState
      */
     void initData(Bundle savedInstanceState);
+
+    /**
+     * 是否使用 {@link EventBus}
+     *
+     * @return
+     */
+    boolean useEventBus();
 
 }
