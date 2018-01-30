@@ -4,14 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
 import com.jess.arms.base.MvpBaseFragment;
 import com.jess.arms.di.component.AppComponent;
-
-import timber.log.Timber;
 
 
 /**
@@ -96,13 +92,19 @@ public class BlankFragment extends MvpBaseFragment {
     }
 
     @Override
-    public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+    public int getLayoutRes() {
+        return R.layout.fragment_blank;
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        Timber.d("initData: ");
+//        Timber.d("initData: ");
+        Log.d(TAG, "initData: ");
+    }
+
+    @Override
+    protected void onLazyLoad() {
+        Log.d(TAG, "onLazyLoad: ");
     }
 
     /**

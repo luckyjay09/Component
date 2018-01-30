@@ -125,7 +125,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDetach() {
-        Timber.i(mFragment.getClass().getSimpleName() + "onDetach: ");
+        Timber.i("FragmentDelegateImpl" + "onDetach: ");
     }
 
     /**

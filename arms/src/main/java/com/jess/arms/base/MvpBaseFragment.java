@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,8 @@ public abstract class MvpBaseFragment<P extends IPresenter> extends Fragment imp
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
-    private View mView;
+    private View mRootView;
+    private boolean isFirstLoad = true; //第一次加载数据
     @Inject
     protected P mPresenter;
 
@@ -54,21 +56,51 @@ public abstract class MvpBaseFragment<P extends IPresenter> extends Fragment imp
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (initView(inflater, container, savedInstanceState) == null) {
-            if (mView == null || !isReuseView()) {
-                mView = inflater.inflate(getLayoutRes(), container, false);
+            if (mRootView == null || !isReuseView()) {
+                mRootView = inflater.inflate(getLayoutRes(), container, false);
             }
-            return mView;
+        } else {
+            mRootView = initView(inflater, container, savedInstanceState);
         }
-        return initView(inflater, container, savedInstanceState);
+        return mRootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated: ");
+        onLoadData();
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (mRootView == null) {
+            return;
+        }
+
+        onLoadData();
+    }
+
+    private void onLoadData() {
+        if (getUserVisibleHint() && isFirstLoad) {
+            isFirstLoad = false;
+            onLazyLoad();
+        }
+    }
+
+    /**
+     * 懒加载 空实现
+     */
+    protected void onLazyLoad() {
+        Log.d(TAG, "onLazyLoad: ");
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) mPresenter.onDestroy();//释放资源
         mPresenter = null;
-        mView = null;
+        mRootView = null;
     }
 
     @Override
