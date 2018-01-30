@@ -67,6 +67,12 @@ public interface IFragment {
     boolean useEventBus();
 
     /**
+     * 是否复用View
+     * @return
+     */
+//    boolean isReuseView();
+
+    /**
      * 初始化 View
      *
      * @param inflater

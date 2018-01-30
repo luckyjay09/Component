@@ -45,7 +45,7 @@ public abstract class MvpBaseFragment<P extends IPresenter> extends Fragment imp
     protected final String TAG = this.getClass().getSimpleName();
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
-    private View mView;
+    private View mRootView;
     @Inject
     protected P mPresenter;
 
