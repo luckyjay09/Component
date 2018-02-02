@@ -62,8 +62,12 @@ public class MainActivity extends MvpBaseActivity {
 
     private List<Fragment> mList = new ArrayList<>();
 
+
+
+
     @Override
     public void initData(Bundle savedInstanceState) {
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
