@@ -10,6 +10,18 @@
     <string name="life">生活</string>
     <string name="mine">我的</string>
 
+    <dimen name="fixed_height_top_padding_inactive">0dp
+    </dimen><!-- 8(Top Padding) - 12/2(extra padding due to badges) = 2 -->
+    <dimen name="fixed_height_top_padding_active">0dp
+    </dimen><!-- 6(Top Padding) - 12/2(extra padding due to badges) = 0 -->
+    <dimen name="fixed_height_bottom_padding">8dp</dimen>
+
+    <dimen name="fixed_label_active">14sp</dimen>
+    <dimen name="fixed_label_inactive">14sp</dimen>
+
+    <dimen name="design_bottom_navigation_active_text_size">14dp</dimen>
+    <dimen name="design_bottom_navigation_text_size">14dp</dimen>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
