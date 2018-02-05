@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        startActivity(new Intent(this, HomeActivity.class));
 
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
