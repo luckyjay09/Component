@@ -229,7 +229,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     .initialise();
         } else if (itemSpinner.getSelectedItemPosition() == 2) {
             bottomNavigationBar
-                    .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
+                    .addItem(new BottomNavigationItem(R.drawable.axa, "Home").setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
                     .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, "Books").setActiveColorResource(R.color.teal))
                     .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.blue).setBadgeItem(shapeBadgeItem))
                     .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.brown))

@@ -18,13 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.HomeActivity"/>
 
         <!-- arms配置 -->
         <meta-data
             android:name="com.njtc.widget.app.GlobalConfiguration"
             android:value="ConfigModule"/>
+
+        <activity
+            android:name=".activity.Main2Activity"
+            android:label="@string/title_activity_main2">
+        </activity>
     </application>
 
 </manifest>
