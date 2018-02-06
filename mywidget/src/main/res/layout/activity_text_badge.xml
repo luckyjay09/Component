@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingRight="16dp"
+    tools:context="com.jay.mywidget.mvp.ui.activity.TextBadgeActivity">
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Hello World!"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#EF4738"
+        android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"/>
+
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#EF4738"
+        android:text="3"
+        android:textColor="@android:color/black"
+        android:textSize="50sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#427fed"
+        android:text="9"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#36b100"
+        android:text="6123456789012"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#FB8C00"
+        android:text="57"
+        android:textSize="14sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:id="@+id/test_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#EF4738"
+        android:text="99+"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#FB8C00"
+        android:text="MaterialBadgeTextView"
+        android:textSize="16sp"/>
+
+    <com.jay.mywidget.widget.MaterialBadgeTextView
+        android:id="@+id/just_new_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#EF4738"/>
+</LinearLayout>

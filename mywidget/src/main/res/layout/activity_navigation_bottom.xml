@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jay.mywidget.mvp.ui.activity.NavigationBottomActivity">
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="NavigationBottomView"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bottom_view_hight"
+        app:itemBackground="@drawable/selector_bottom_bar_ripple"
+        app:itemIconTint="@color/main_text_selector"
+        app:itemTextColor="@color/main_text_selector"
+        app:menu="@menu/navigation"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioGroup"/>
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bottom_view_hight"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/rb_navigation_view"
+            android:drawableTop="@drawable/selector_bottom_home"
+            android:textColor="@color/main_text_selector"
+            android:text="首页"/>
+
+        <RadioButton
+            android:id="@+id/rb_invest"
+            style="@style/rb_navigation_view"
+            android:drawableTop="@drawable/selector_bottom_invest"
+            android:text="投资"/>
+
+        <RadioButton
+            android:id="@+id/rb_mine"
+            style="@style/rb_navigation_view"
+            android:drawableTop="@drawable/selector_bottom_mine"
+            android:text="个人"/>
+
+        <RadioButton
+            android:id="@+id/rb_more"
+            style="@style/rb_navigation_view"
+            android:drawableTop="@drawable/selector_bottom_more"
+            android:text="更多"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LinearLayout"/>
+
+    <LinearLayout
+        android:id="@+id/ll_main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout style="@style/main_ll">
+
+            <ImageView
+                style="@style/main_img"
+                android:src="@drawable/selector_bottom_home"/>
+
+            <TextView
+                style="@style/main_text"
+                android:text="首页"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/main_ll">
+
+            <ImageView
+                style="@style/main_img"
+                android:src="@drawable/selector_bottom_invest"/>
+
+            <TextView
+                style="@style/main_text"
+                android:text="投资"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/main_ll">
+
+            <ImageView
+                style="@style/main_img"
+                android:src="@drawable/selector_bottom_mine"/>
+
+            <TextView
+                style="@style/main_text"
+                android:text="个人"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/main_ll">
+
+            <ImageView
+                style="@style/main_img"
+                android:src="@drawable/selector_bottom_more"/>
+
+            <TextView
+                style="@style/main_text"
+                android:text="更多"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RelativeLayout"/>
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            style="@style/layout_width0_weight1_heightw">
+
+            <ImageView
+                android:id="@+id/iv_home"
+                style="@style/main_img_centerHorizontal"
+                android:src="@drawable/selector_bottom_home"/>
+
+            <TextView
+                style="@style/navigation_bottom_text"
+                android:layout_below="@id/iv_home"
+                android:text="首页"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layout_width0_weight1_heightw">
+
+            <ImageView
+                android:id="@+id/iv_invest"
+                style="@style/main_img_centerHorizontal"
+                android:src="@drawable/selector_bottom_invest"/>
+
+            <TextView
+                style="@style/navigation_bottom_text"
+                android:layout_below="@id/iv_invest"
+                android:text="投资"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layout_width0_weight1_heightw">
+
+            <ImageView
+                android:id="@+id/iv_mine"
+                style="@style/main_img_centerHorizontal"
+                android:src="@drawable/selector_bottom_mine"/>
+
+            <TextView
+                style="@style/navigation_bottom_text"
+                android:layout_below="@id/iv_mine"
+                android:text="个人"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layout_width0_weight1_heightw">
+
+            <ImageView
+                android:id="@+id/iv_more"
+                style="@style/main_img_centerHorizontal"
+                android:src="@drawable/selector_bottom_mine"/>
+
+            <TextView
+                style="@style/navigation_bottom_text"
+                android:layout_below="@id/iv_more"
+                android:text="更多"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
