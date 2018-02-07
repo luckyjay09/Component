@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingRight="16dp"
+    android:padding="16dp"
     tools:context="com.jay.mywidget.mvp.ui.activity.TextBadgeActivity">
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Hello World!"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -25,7 +25,7 @@
         android:textSize="12sp"/>
 
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -34,7 +34,7 @@
         android:textColor="@android:color/black"
         android:textSize="50sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         android:textColor="@android:color/white"
         android:textSize="12sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
         android:textColor="@android:color/white"
         android:textSize="25sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -60,7 +60,7 @@
         android:text="57"
         android:textSize="14sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:id="@+id/test_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -78,7 +78,7 @@
         android:text="MaterialBadgeTextView"
         android:textSize="16sp"/>
 
-    <com.jay.mywidget.widget.MaterialBadgeTextView
+    <com.jay.mywidget.widget.badge.BadgeTextView
         android:id="@+id/just_new_feature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.jay.mywidget.widget;
+package com.jay.mywidget.widget.badge;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.jay.mywidget.R;
 
-public class MaterialBadgeTextView extends TextView {
+public class BadgeTextView extends TextView {
 
     private static final int DEFAULT_FILL_TYPE = 0;
 
@@ -52,15 +52,15 @@ public class MaterialBadgeTextView extends TextView {
 
     private boolean isHighLightMode;
 
-    public MaterialBadgeTextView(final Context context) {
+    public BadgeTextView(final Context context) {
         this(context, null);
     }
 
-    public MaterialBadgeTextView(Context context, AttributeSet attrs) {
+    public BadgeTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MaterialBadgeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BadgeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -77,12 +77,12 @@ public class MaterialBadgeTextView extends TextView {
         diffWH = (int) (Math.abs(textHeight - textWidth) / 2);
         int horizontalPadding = basePadding + diffWH;
         setPadding(horizontalPadding, basePadding, horizontalPadding, basePadding);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MaterialBadgeTextView);
-        backgroundColor = typedArray.getColor(R.styleable.MaterialBadgeTextView_android_background, Color.WHITE);
-        borderColor = typedArray.getColor(R.styleable.MaterialBadgeTextView_mbtv_border_color, Color.TRANSPARENT);
-        borderWidth = typedArray.getDimension(R.styleable.MaterialBadgeTextView_mbtv_border_width, 0);
-        borderAlpha = typedArray.getFloat(R.styleable.MaterialBadgeTextView_mbtv_border_alpha, 1);
-        ctType = typedArray.getInt(R.styleable.MaterialBadgeTextView_mbtv_type, DEFAULT_FILL_TYPE);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BadgeTextView);
+        backgroundColor = typedArray.getColor(R.styleable.BadgeTextView_android_background, Color.WHITE);
+        borderColor = typedArray.getColor(R.styleable.BadgeTextView_mbtv_border_color, Color.TRANSPARENT);
+        borderWidth = typedArray.getDimension(R.styleable.BadgeTextView_mbtv_border_width, 0);
+        borderAlpha = typedArray.getFloat(R.styleable.BadgeTextView_mbtv_border_alpha, 1);
+        ctType = typedArray.getInt(R.styleable.BadgeTextView_mbtv_type, DEFAULT_FILL_TYPE);
         typedArray.recycle();
     }
 
@@ -245,8 +245,8 @@ public class MaterialBadgeTextView extends TextView {
 
         @Override
         public void draw(Canvas canvas, Paint paint) {
-            final int viewWidth = MaterialBadgeTextView.this.getWidth();
-            final int viewHeight = MaterialBadgeTextView.this.getHeight();
+            final int viewWidth = BadgeTextView.this.getWidth();
+            final int viewHeight = BadgeTextView.this.getHeight();
             canvas.drawCircle(viewWidth / 2, viewHeight / 2, (mCircleDiameter / 2 + mShadowRadius), mShadowPaint);
             canvas.drawCircle(viewWidth / 2, viewHeight / 2, (mCircleDiameter / 2), paint);
         }

@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.btn2) {
             startActivity(new Intent(this, Main2Activity.class));
 
-        } else if (id == R.id.bt\n3) {
+        } else if (id == R.id.btn3) {
             i++;
             tv_count.setText(String.valueOf(i));
         }

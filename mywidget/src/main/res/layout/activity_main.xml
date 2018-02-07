@@ -8,5 +8,9 @@
     android:layout_height="match_parent"
     tools:context="com.jay.mywidget.mvp.ui.activity.MainActivity">
 
-
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"/>
 </RelativeLayout>
