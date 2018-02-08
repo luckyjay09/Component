@@ -10,4 +10,8 @@
     <string name="action_notification">Notification</string>
     <string name="action_message">Message</string>
     <string name="action_shop_cart">Shop Cart</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

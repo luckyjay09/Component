@@ -9,18 +9,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.jay.mywidget.R;
+import com.jess.arms.util.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView lv;
 
-    private String[] mStr = new String[]{"底部导航栏创建的几种方式",
-            "自定义Badge"};
+    private String[] mStr = new String[]{
+            "底部导航栏创建的几种方式",
+            "自定义Badge",
+            "状态栏改变",
+            "抽屉布局",
+            "沉浸式"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Utils.init(getApplication());
+
         setContentView(R.layout.activity_main);
 
         lv = (ListView) findViewById(R.id.lv);
@@ -36,6 +44,20 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         startActivity(new Intent(MainActivity.this, TextBadgeActivity.class));
+
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, StatusBarActivity.class));
+
+                        break;
+
+                    case 3:
+                        startActivity(new Intent(MainActivity.this, DrawerActivity.class));
+
+                        break;
+
+                    case 4:
+                        startActivity(new Intent(MainActivity.this, ImmersiveActivity.class));
 
                         break;
                     default:

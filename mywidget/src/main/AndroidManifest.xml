@@ -29,6 +29,17 @@
         </activity>
         <activity android:name=".mvp.ui.activity.TextBadgeActivity">
         </activity>
+        <activity
+            android:name=".mvp.ui.activity.StatusBarActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".mvp.ui.activity.ImmersiveActivity">
+        </activity>
     </application>
 
 </manifest>

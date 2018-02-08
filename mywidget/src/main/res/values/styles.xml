@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="layout_width0_weight1_heightw">
         <item name="android:layout_width">0dp</item>
@@ -47,5 +55,6 @@
     <style name="navigation_bottom_text" parent="main_text">
         <item name="android:layout_centerHorizontal">true</item>
     </style>
+
 
 </resources>
