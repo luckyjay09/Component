@@ -5,12 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.jay.mywidget.mvp.ui.activity.ImmersiveActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg_timg2"
-        android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_timg2"/>
+
+    <Button
+        android:layout_centerInParent="true"
+        android:onClick="onClick"
+        android:id="@+id/btn_immersive_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="沉浸导航栏"/>
+    <Button
+        android:layout_above="@id/btn_immersive_2"
+        android:onClick="onClick"
+        android:id="@+id/btn_immersive_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="沉浸状态栏"/>
+
+    <Button
+        android:layout_below="@id/btn_immersive_2"
+        android:onClick="onClick"
+        android:id="@+id/btn_immersive_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="沉浸"/>
 </RelativeLayout>
